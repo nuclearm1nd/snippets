@@ -1,0 +1,32 @@
+{
+  "xml": {
+    "prefix": "xml",
+    "body": "<?xml version=\"1.1\" encoding=\"UTF-8\"?>",
+    "description": "XML - declares xml version",
+    "scope": "xml"
+  },
+  "databaseChangeLog": {
+    "prefix": "dcl",
+    "body": "<databaseChangeLog\n  xmlns=\"http://www.liquibase.org/xml/ns/dbchangelog\"\n  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n  xmlns:ext=\"http://www.liquibase.org/xml/ns/dbchangelog-ext\"\n  xsi:schemaLocation=\"http://www.liquibase.org/xml/ns/dbchangelog http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/dbchangelog/4.5/dbchangelog-4.5.xsd\n  http://www.liquibase.org/xml/ns/dbchangelog-ext http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/liquibase-ext-schema/latest/liquibase-ext-schema-latest.xsd\">\n$1\n</databaseChangeLog>",
+    "description": "databaseChangeLog liquibase tag",
+    "scope": "xml"
+  },
+  "changeSet": {
+    "prefix": "chst",
+    "body": "<changeSet author=\"Volodymyr Savchenko\" id=\"$1\">\n  $2\n</changeSet>",
+    "description": "Liquibase changeset",
+    "scope": "xml"
+  },
+  "createTable": {
+    "prefix": "crtbl",
+    "body": "<createTable tableName=\"$1\" ext:historyFlag=\"true\">\n  $2\n<createTable/>",
+    "description": "Liquibase createTable",
+    "scope": "xml"
+  },
+  "idColumn": {
+    "prefix": "idclmn",
+    "body": "<column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\" remarks=\"Ідентифікатор\">\n  <constraints nullable=\"false\"\n               primaryKey=\"true\"\n               primaryKeyName=\"$1\" />\n</column>",
+    "description": "standard ID column for createTable",
+    "scope": "xml"
+  }
+}
