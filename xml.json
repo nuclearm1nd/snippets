@@ -23,7 +23,7 @@
   "changeSet": {
     "prefix": "changeSet",
     "body": [
-      "<changeSet author=\"Volodymyr Savchenko\" id=\"$1\">",
+      "<changeSet author=\"$1\" id=\"$2\">",
       "  $2",
       "</changeSet>"
     ],
@@ -99,6 +99,16 @@
     "description": "Liquibase extension to create search condition",
     "scope": "xml"
   },
+  "tableInSearchCondition": {
+    "prefix": "table",
+    "body": [
+      "<ext:table name=\"$1\">",
+      "  <ext:column name=\"$2\" />",
+      "</ext:table>"
+    ],
+    "description": "table Liquibase extension tag to use in search conditions",
+    "scope": "xml"
+  },
   "whereExt": {
     "prefix": "where",
     "body": [
@@ -122,6 +132,55 @@
       "</ext:join>"
     ],
     "description": "base Liquibase join for searchConditions",
+    "scope": "xml"
+  },
+  "joinWithCondition": {
+    "prefix": "joinc",
+    "body": [
+      "<ext:join type=\"${1:inner}\">",
+      "  <ext:left alias=\"$2\">",
+      "    <ext:column name=\"$3\" />",
+      "  </ext:left>",
+      "  <ext:right alias=\"$4\">",
+      "    <ext:column name=\"$5\" />",
+      "  </ext:right>",
+      "  <ext:condition",
+      "    logicOperator=\"${6:and}\"",
+      "    tableAlias=\"$7\"",
+      "    columnName=\"$8\"",
+      "    operator=\"$9\"",
+      "    value=\"$10\" />",
+      "</ext:join>"
+    ],
+    "description": "base Liquibase join for searchConditions",
+    "scope": "xml"
+  },
+  "labelExtension": {
+    "prefix": "label",
+    "body": "<ext:label translation=\"$2\">$1</ext:label>",
+    "description": "label Liquibase extension for createType",
+    "scope": "xml"
+  },
+  "createType": {
+    "prefix": "createType",
+    "body": [
+      "<ext:createType name=\"$1\">",
+      "  $2",
+      "</ext:createType>"
+    ],
+    "description": "createType Liquibase extension",
+    "scope": "xml"
+  },
+  "createEnum": {
+    "prefix": "enum",
+    "body": [
+      "<ext:createType name=\"$1\">",
+			"  <ext:asEnum>",
+			"  	<ext:label translation=\"$3\">$2</ext:label>",
+			"  </ext:asEnum>",
+      "</ext:createType>"
+    ],
+    "description": "Liquibase create enum using createType extension",
     "scope": "xml"
   }
 }
