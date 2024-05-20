@@ -7,43 +7,83 @@
   },
   "databaseChangeLog": {
     "prefix": "databaseChangeLog",
-    "body": "<databaseChangeLog\n  xmlns=\"http://www.liquibase.org/xml/ns/dbchangelog\"\n  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n  xmlns:ext=\"http://www.liquibase.org/xml/ns/dbchangelog-ext\"\n  xsi:schemaLocation=\"http://www.liquibase.org/xml/ns/dbchangelog http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/dbchangelog/4.5/dbchangelog-4.5.xsd\n  http://www.liquibase.org/xml/ns/dbchangelog-ext http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/liquibase-ext-schema/latest/liquibase-ext-schema-latest.xsd\">\n$1\n</databaseChangeLog>",
+    "body": [
+      "<databaseChangeLog",
+      "  xmlns=\"http://www.liquibase.org/xml/ns/dbchangelog\"",
+      "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"",
+      "  xmlns:ext=\"http://www.liquibase.org/xml/ns/dbchangelog-ext\"",
+      "  xsi:schemaLocation=\"http://www.liquibase.org/xml/ns/dbchangelog http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/dbchangelog/4.5/dbchangelog-4.5.xsd",
+      "  http://www.liquibase.org/xml/ns/dbchangelog-ext http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/liquibase-ext-schema/latest/liquibase-ext-schema-latest.xsd\">",
+      "$1",
+      "</databaseChangeLog>"
+    ],
     "description": "databaseChangeLog liquibase tag",
     "scope": "xml"
   },
   "changeSet": {
     "prefix": "changeSet",
-    "body": "<changeSet author=\"Volodymyr Savchenko\" id=\"$1\">\n  $2\n</changeSet>",
+    "body": [
+      "<changeSet author=\"Volodymyr Savchenko\" id=\"$1\">",
+      "  $2",
+      "</changeSet>"
+    ],
     "description": "Liquibase changeset",
     "scope": "xml"
   },
   "createTable": {
     "prefix": "createTable",
-    "body": "<createTable tableName=\"$1\" ext:historyFlag=\"true\">\n  $2\n<createTable/>",
+    "body": [
+      "<createTable tableName=\"$1\" ext:historyFlag=\"true\">",
+      "  $2",
+      "</createTable>"
+    ],
     "description": "Liquibase createTable",
     "scope": "xml"
   },
   "column": {
     "prefix": "column",
-    "body": "<column name=\"$1\" type=\"$2\" remarks=\"$3\">\n  <constraints nullable=\"${4:false}\" />\n</column>",
+    "body": [
+      "<column name=\"$1\" type=\"$2\" remarks=\"$3\">",
+      "  <constraints nullable=\"${4:false}\" />",
+      "</column>"
+    ],
     "description": "Liquibase column",
     "scope": "xml"
   },
   "idColumn": {
     "prefix": "idcolumn",
-    "body": "<column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\" remarks=\"Ідентифікатор\">\n  <constraints nullable=\"false\"\n               primaryKey=\"true\"\n               primaryKeyName=\"pk_$1\" />\n</column>",
+    "body": [
+      "<column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\" remarks=\"Ідентифікатор\">",
+      "  <constraints nullable=\"false\"",
+      "               primaryKey=\"true\"",
+      "               primaryKeyName=\"pk_$1\" />",
+      "</column>"
+    ],
     "description": "standard ID column for createTable",
     "scope": "xml"
   },
   "foreignKeyColumn": {
     "prefix": "fkcolumn",
-    "body": "<column name=\"$1\" type=\"${2:UUID}\" remarks=\"$3\">\n  <constraints\n    nullable=\"false\"\n    foreignKeyName=\"fk_$4\"\n    referencedTableName=\"$5\"\n    referencedColumnNames=\"${6:id}\" />\n</column>",
+    "body": [
+      "<column name=\"$1\" type=\"${2:UUID}\" remarks=\"$3\">",
+      "  <constraints",
+      "    nullable=\"false\"",
+      "    foreignKeyName=\"fk_$4\"",
+      "    referencedTableName=\"$5\"",
+      "    referencedColumnNames=\"${6:id}\" />",
+      "</column>"
+    ],
     "description": "Liquibase column with foreign key constraint",
     "scope": "xml"
   },
   "addUniqueConstraint": {
     "prefix": "addUniqueConstraint",
-    "body": "<addUniqueConstraint\n  constraintName=\"$1\"\n  tableName=\"$2\"\n  columnNames=\"${3:,}\" />",
+    "body": [
+      "<addUniqueConstraint",
+      "  constraintName=\"$1\"",
+      "  tableName=\"$2\"",
+      "  columnNames=\"${3:,}\" />"
+    ],
     "description": "Liquibase unique constraint",
     "scope": "xml"
   }
