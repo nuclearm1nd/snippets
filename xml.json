@@ -43,8 +43,8 @@
   "column": {
     "prefix": "column",
     "body": [
-      "<column name=\"$1\" type=\"$2\" remarks=\"$3\">",
-      "  <constraints nullable=\"${4:false}\" />",
+      "<column name=\"$1\" type=\"$2\"",
+      "  <constraints nullable=\"${3:false}\" />",
       "</column>"
     ],
     "description": "Liquibase column",
@@ -53,7 +53,7 @@
   "idColumn": {
     "prefix": "idcolumn",
     "body": [
-      "<column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\" remarks=\"Ідентифікатор\">",
+      "<column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\">",
       "  <constraints nullable=\"false\"",
       "               primaryKey=\"true\"",
       "               primaryKeyName=\"pk_$1\" />",
@@ -65,12 +65,12 @@
   "foreignKeyColumn": {
     "prefix": "fkcolumn",
     "body": [
-      "<column name=\"$1\" type=\"${2:UUID}\" remarks=\"$3\">",
+      "<column name=\"$1\" type=\"${2:UUID}\">",
       "  <constraints",
       "    nullable=\"false\"",
-      "    foreignKeyName=\"fk_$4\"",
-      "    referencedTableName=\"$5\"",
-      "    referencedColumnNames=\"${6:id}\" />",
+      "    foreignKeyName=\"fk_$3\"",
+      "    referencedTableName=\"$4\"",
+      "    referencedColumnNames=\"${5:id}\" />",
       "</column>"
     ],
     "description": "Liquibase column with foreign key constraint",
