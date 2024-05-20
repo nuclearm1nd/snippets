@@ -25,8 +25,20 @@
   },
   "idColumn": {
     "prefix": "idclmn",
-    "body": "<column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\" remarks=\"Ідентифікатор\">\n  <constraints nullable=\"false\"\n               primaryKey=\"true\"\n               primaryKeyName=\"$1\" />\n</column>",
+    "body": "<column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\" remarks=\"Ідентифікатор\">\n  <constraints nullable=\"false\"\n               primaryKey=\"true\"\n               primaryKeyName=\"pk_$1\" />\n</column>",
     "description": "standard ID column for createTable",
+    "scope": "xml"
+  },
+  "column": {
+    "prefix": "clmn",
+    "body": "<column name=\"$1\" type=\"$2\" remarks=\"$3\">\n  <constraints nullable=\"${4:false}\" />\n</column>",
+    "description": "Liquibase column",
+    "scope": "xml"
+  },
+  "foreignKeyColumn": {
+    "prefix": "fkclmn",
+    "body": "<column name=\"$1\" type=\"${2:UUID}\" remarks=\"$3\">\n  <constraints\n    nullable=\"false\"\n    foreignKeyName=\"fk_$4\"\n    referencedTableName=\"$5\"\n    referencedColumnNames=\"${6:id}\" />\n</column>",
+    "description": "Liquibase column with foreign key constraint",
     "scope": "xml"
   }
 }
