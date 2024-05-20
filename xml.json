@@ -40,5 +40,11 @@
     "body": "<column name=\"$1\" type=\"${2:UUID}\" remarks=\"$3\">\n  <constraints\n    nullable=\"false\"\n    foreignKeyName=\"fk_$4\"\n    referencedTableName=\"$5\"\n    referencedColumnNames=\"${6:id}\" />\n</column>",
     "description": "Liquibase column with foreign key constraint",
     "scope": "xml"
+  },
+  "addUniqueConstraint": {
+    "prefix": "addUniqueConstraint",
+    "body": "<addUniqueConstraint\n  constraintName=\"$1\"\n  tableName=\"$2\"\n  columnNames=\"${3:,}\" />",
+    "description": "Liquibase unique constraint",
+    "scope": "xml"
   }
 }
