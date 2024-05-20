@@ -86,5 +86,42 @@
     ],
     "description": "Liquibase unique constraint",
     "scope": "xml"
+  },
+  "createSearchCondition": {
+    "prefix": "createSearchCondition",
+    "body": [
+      "<ext:createSearchCondition name=\"$1\">",
+      "  <ext:table name=\"$2\">",
+      "    <ext:column name=\"$3\" sorting=\"${4:asc}\" searchType=\"${5:contains}\" />",
+      "  </ext:table>",
+      "</ext:createSearchCondition>"
+    ],
+    "description": "Liquibase extension to create search condition",
+    "scope": "xml"
+  },
+  "whereExt": {
+    "prefix": "where",
+    "body": [
+      "<ext:where>",
+      "  <ext:condition columnName=\"$1\" operator=\"${2:eq}\" value=\"$3\"/>",
+			"</ext:where>"
+    ],
+    "description": "Liquibase where extension for searches",
+    "scope": "xml"
+  },
+  "joinBasic": {
+    "prefix": "join",
+    "body": [
+      "<ext:join type=\"${1:inner}\">",
+      "  <ext:left alias=\"$2\">",
+      "    <ext:column name=\"$3\" />",
+      "  </ext:left>",
+      "  <ext:right alias=\"$4\">",
+      "    <ext:column name=\"$5\" />",
+      "  </ext:right>",
+      "</ext:join>"
+    ],
+    "description": "base Liquibase join for searchConditions",
+    "scope": "xml"
   }
 }
