@@ -21,17 +21,17 @@
     "scope": "xml"
   },
   "changeSet": {
-    "prefix": "changeSet",
+    "prefix": "changeset",
     "body": [
       "<changeSet author=\"$1\" id=\"$2\">",
-      "  $2",
+      "  $3",
       "</changeSet>"
     ],
     "description": "Liquibase changeset",
     "scope": "xml"
   },
   "createTable": {
-    "prefix": "createTable",
+    "prefix": "createtable",
     "body": [
       "<createTable tableName=\"$1\" ext:historyFlag=\"true\">",
       "  $2",
@@ -68,12 +68,27 @@
       "<column name=\"$1\" type=\"${2:UUID}\">",
       "  <constraints",
       "    nullable=\"false\"",
-      "    foreignKeyName=\"fk_$3\"",
-      "    referencedTableName=\"$4\"",
-      "    referencedColumnNames=\"${5:id}\" />",
+      "    referencedTableName=\"$3\"",
+      "    referencedColumnNames=\"${4:id}\"",
+      "    foreignKeyName=\"fk_$5_$3_$4\" />",
       "</column>"
     ],
     "description": "Liquibase column with foreign key constraint",
+    "scope": "xml"
+  },
+  "createTableWithIdColumn": {
+    "prefix": "createtable",
+    "body": [
+      "<createTable tableName=\"$1\" ext:historyFlag=\"true\">",
+      "  <column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\">",
+      "    <constraints nullable=\"false\"",
+      "                 primaryKey=\"true\"",
+      "                 primaryKeyName=\"pk_$1_id\" />",
+      "  </column>",
+      "  $2",
+      "</createTable>"
+    ],
+    "description": "Liquibase create table with default id column",
     "scope": "xml"
   },
   "addUniqueConstraint": {
