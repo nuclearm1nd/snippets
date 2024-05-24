@@ -6,7 +6,10 @@
     "scope": "xml"
   },
   "databaseChangeLog": {
-    "prefix": "databaseChangeLog",
+    "prefix": [
+      "databaseChangeLog",
+      "dcl"
+    ],
     "body": [
       "<databaseChangeLog",
       "  xmlns=\"http://www.liquibase.org/xml/ns/dbchangelog\"",
@@ -21,7 +24,10 @@
     "scope": "xml"
   },
   "changeSet": {
-    "prefix": "changeset",
+    "prefix": [
+      "changeset",
+      "chst"
+    ],
     "body": [
       "<changeSet author=\"$1\" id=\"$2\">",
       "  $3",
@@ -41,10 +47,14 @@
     "scope": "xml"
   },
   "column": {
-    "prefix": "column",
+    "prefix": [
+      "column",
+      "clmn",
+      "cln"
+    ],
     "body": [
-      "<column name=\"$1\" type=\"$2\"",
-      "  <constraints nullable=\"${3:false}\" />",
+      "<column name=\"$1\" type=\"$2\" ${3:remarks=\"$4\"}>",
+      "  <constraints nullable=\"${5:false}\" />",
       "</column>"
     ],
     "description": "Liquibase column",
@@ -70,7 +80,7 @@
       "    nullable=\"false\"",
       "    referencedTableName=\"$3\"",
       "    referencedColumnNames=\"${4:id}\"",
-      "    foreignKeyName=\"fk_$5_$3_$4\" />",
+      "    foreignKeyName=\"fk_$5_$1_$3_$4\" />",
       "</column>"
     ],
     "description": "Liquibase column with foreign key constraint",
