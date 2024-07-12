@@ -226,18 +226,21 @@
       "  xsi:schemaLocation=\"http://www.liquibase.org/xml/ns/dbchangelog http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/dbchangelog/4.5/dbchangelog-4.5.xsd",
       "                      http://www.liquibase.org/xml/ns/dbchangelog-ext http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/liquibase-ext-schema/latest/liquibase-ext-schema-latest.xsd\">",
       "",
-      "  <changeSet author=\"${1}\" id=\"create_${2}s_table\">",
-      "    <createTable tableName=\"${2}s\" ext:historyFlag=\"true\">",
-      "      <column name=\"${2}_id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\">",
+      "  <changeSet author=\"${1}\" id=\"create ${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g} table\">",
+      "    <createTable tableName=\"${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}\" ext:historyFlag=\"true\">",
+      "      <column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\">",
       "        <constraints nullable=\"false\"",
       "          primaryKey=\"true\"",
-      "          primaryKeyName=\"pk_${2}_id\" />",
+      "          primaryKeyName=\"pk_${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}_id\" />",
       "      </column>",
-      "        ${3}",
-      "      <column name=\"${2}_status\" type=\"TEXT\">",
+      "        ${2}",
+      "      <column name=\"internal_status\" type=\"TEXT\">",
       "        <constraints nullable=\"false\" />",
       "      </column>",
-      "      <column name=\"${2}_created_at\" type=\"DATE\" defaultValueComputed=\"now()\">",
+      "      <column name=\"internal_version\" type=\"INT\">",
+      "        <constraints nullable=\"false\" />",
+      "      </column>",
+      "      <column name=\"internal_created_at\" type=\"TIMESTAMP\">",
       "        <constraints nullable=\"false\" />",
       "      </column>",
       "    </createTable>",
@@ -263,16 +266,69 @@
       "  xsi:schemaLocation=\"http://www.liquibase.org/xml/ns/dbchangelog http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/dbchangelog/4.5/dbchangelog-4.5.xsd",
       "                      http://www.liquibase.org/xml/ns/dbchangelog-ext http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/liquibase-ext-schema/latest/liquibase-ext-schema-latest.xsd\">",
       "",
-      "  <changeSet author=\"${1}\" id=\"create_${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}\">",
+      "  <changeSet author=\"${1}\" id=\"create ${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g} enum\">",
       "    <ext:createType name=\"${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}\">",
-			"      <ext:asEnum>",
-			"      	<ext:label translation=\"${3}\">${2}</ext:label>",
-			"      </ext:asEnum>",
+      "      <ext:asEnum>",
+      "      	<ext:label translation=\"${3}\">${2}</ext:label>",
+      "      </ext:asEnum>",
       "    </ext:createType>",
       "  </changeSet>",
       "</databaseChangeLog>"
     ],
     "description": "Liquibase create enum file template",
+    "scope": "xml"
+  },
+  "cleanupNotice": {
+    "prefix": [
+      "cleanup"
+    ],
+    "body": [
+      "<!-- CLEANUP: remove drops and unnecessary creates -->"
+    ],
+    "description": "basic cleanup notice",
+    "scope": "xml"
+  },
+  "dropTable": {
+    "prefix": [
+      "droptable"
+    ],
+    "body": [
+      "<changeSet author=\"$1\" id=\"drop $2 table ${3:v$4}\">",
+      "  <dropTable tableName=\"$2\" cascadeConstraints=\"true\" />",
+      "  <dropTable tableName=\"$2_hst\" cascadeConstraints=\"true\" />",
+      "</changeSet>"
+    ],
+    "description": "Liquibase drop table and historic table, cascade constraints",
+    "scope": "xml"
+  },
+  "fileForeignKey": {
+    "prefix": [
+      "fileForeignKey",
+      "filefk",
+      "fileforeignkey"
+    ],
+    "body": [
+      "<?xml version=\"1.1\" encoding=\"UTF-8\"?>",
+      "",
+      "<databaseChangeLog",
+      "  xmlns=\"http://www.liquibase.org/xml/ns/dbchangelog\"",
+      "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"",
+      "  xmlns:ext=\"http://www.liquibase.org/xml/ns/dbchangelog-ext\"",
+      "  xsi:schemaLocation=\"http://www.liquibase.org/xml/ns/dbchangelog http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/dbchangelog/4.5/dbchangelog-4.5.xsd",
+      "                      http://www.liquibase.org/xml/ns/dbchangelog-ext http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/liquibase-ext-schema/latest/liquibase-ext-schema-latest.xsd\">",
+      "",
+      "  <changeSet author=\"${1}\" id=\"create ${2} ${3} foreign key\">",
+      "    <addForeignKeyConstraint",
+      "      baseTableName=\"${2}\"",
+      "      baseColumnNames=\"${3}_id\"",
+      "      constraintName=\"fk_${2}_${3}\"",
+      "      referencedTableName=\"${3}\"",
+      "      referencedColumnNames=\"id\" />",
+      "  </changeSet>",
+      "",
+      "</databaseChangeLog>"
+    ],
+    "description": "Liquibase file to add a foreign key",
     "scope": "xml"
   }
 }
