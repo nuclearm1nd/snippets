@@ -27,6 +27,10 @@
       },
       {
         "language": ["xml"],
+        "path": "./liquibase/partialUpdate.json"
+      },
+      {
+        "language": ["xml"],
         "path": "./liquibase/searchCondition.json"
       },
       {

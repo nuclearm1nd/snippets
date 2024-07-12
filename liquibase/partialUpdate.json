@@ -1,0 +1,31 @@
+{
+  "filePartialUpdate": {
+    "prefix": [
+      "filePartialUpdate",
+      "fpartial",
+      "filepartial",
+      "fprtl"
+    ],
+    "body": [
+      "<?xml version=\"1.1\" encoding=\"UTF-8\"?>",
+      "",
+      "<databaseChangeLog",
+      "  xmlns=\"http://www.liquibase.org/xml/ns/dbchangelog\"",
+      "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"",
+      "  xmlns:ext=\"http://www.liquibase.org/xml/ns/dbchangelog-ext\"",
+      "  xsi:schemaLocation=\"http://www.liquibase.org/xml/ns/dbchangelog http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/dbchangelog/4.5/dbchangelog-4.5.xsd",
+      "                      http://www.liquibase.org/xml/ns/dbchangelog-ext http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/liquibase-ext-schema/latest/liquibase-ext-schema-latest.xsd\">",
+      "",
+      "  <changeSet author=\"${1}\" id=\"partial update ${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}\">",
+      "    <ext:partialUpdate name=\"${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}\">",
+      "      <ext:table name=\"${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}\">",
+      "        <ext:column name=\"${2}\" />",
+      "      </ext:table>",
+      "    </ext:partialUpdate>",
+      "  </changeSet>",
+      "</databaseChangeLog>"
+    ],
+    "description": "Liquibase create table with standard columns",
+    "scope": "xml"
+  }
+}
