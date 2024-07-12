@@ -1,0 +1,86 @@
+{
+  "createSearchCondition": {
+    "prefix": [
+      "createSearchCondition",
+      "createsearchcondition",
+      "<createsearchcondition",
+      "<ext:createsearchcondition",
+      "SC"
+    ],
+    "body": [
+      "<ext:createSearchCondition name=\"$1\">",
+      "  <ext:table name=\"$2\">",
+      "    <ext:column name=\"$3\" sorting=\"${4:asc}\" searchType=\"${5:contains}\" />",
+      "  </ext:table>",
+      "</ext:createSearchCondition>"
+    ],
+    "description": "Liquibase extension to create search condition",
+    "scope": "xml"
+  },
+  "tableInSearchCondition": {
+    "prefix": [
+        "table",
+        "sctable",
+        "SCtable"
+      ],
+    "body": [
+      "<ext:table name=\"$1\">",
+      "  <ext:column name=\"$2\" />",
+      "</ext:table>"
+    ],
+    "description": "table Liquibase extension tag to use in search conditions",
+    "scope": "xml"
+  },
+  "whereExt": {
+    "prefix": [
+      "where"
+    ],
+    "body": [
+      "<ext:where>",
+      "  <ext:condition columnName=\"$1\" operator=\"${2:eq}\" value=\"$3\"/>",
+			"</ext:where>"
+    ],
+    "description": "Liquibase where extension for searches",
+    "scope": "xml"
+  },
+  "joinBasic": {
+    "prefix": [
+      "join"
+    ],
+    "body": [
+      "<ext:join type=\"${1:inner}\">",
+      "  <ext:left alias=\"$2\">",
+      "    <ext:column name=\"$3\" />",
+      "  </ext:left>",
+      "  <ext:right alias=\"$4\">",
+      "    <ext:column name=\"$5\" />",
+      "  </ext:right>",
+      "</ext:join>"
+    ],
+    "description": "base Liquibase join for searchConditions",
+    "scope": "xml"
+  },
+  "joinWithCondition": {
+    "prefix": [
+      "joinc"
+    ],
+    "body": [
+      "<ext:join type=\"${1:inner}\">",
+      "  <ext:left alias=\"$2\">",
+      "    <ext:column name=\"$3\" />",
+      "  </ext:left>",
+      "  <ext:right alias=\"$4\">",
+      "    <ext:column name=\"$5\" />",
+      "  </ext:right>",
+      "  <ext:condition",
+      "    logicOperator=\"${6:and}\"",
+      "    tableAlias=\"$7\"",
+      "    columnName=\"$8\"",
+      "    operator=\"$9\"",
+      "    value=\"$10\" />",
+      "</ext:join>"
+    ],
+    "description": "base Liquibase join for searchConditions",
+    "scope": "xml"
+  }
+}

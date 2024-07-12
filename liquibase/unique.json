@@ -1,0 +1,15 @@
+{
+  "addUniqueConstraint": {
+    "prefix": [
+      "addUniqueConstraint"
+    ],
+    "body": [
+      "<addUniqueConstraint",
+      "  constraintName=\"$1\"",
+      "  tableName=\"$2\"",
+      "  columnNames=\"${3:,}\" />"
+    ],
+    "description": "Liquibase unique constraint",
+    "scope": "xml"
+  }
+}

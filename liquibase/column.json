@@ -1,0 +1,42 @@
+{
+  "column": {
+    "prefix": [
+      "column",
+      "clmn",
+      "cln"
+    ],
+    "body": [
+      "<column name=\"$1\" type=\"$2\" ${3:remarks=\"$4\"}>",
+      "  <constraints nullable=\"${5:false}\" />",
+      "</column>"
+    ],
+    "description": "Liquibase column",
+    "scope": "xml"
+  },
+  "idColumn": {
+    "prefix": "idcolumn",
+    "body": [
+      "<column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\">",
+      "  <constraints nullable=\"false\"",
+      "               primaryKey=\"true\"",
+      "               primaryKeyName=\"pk_$1\" />",
+      "</column>"
+    ],
+    "description": "standard ID column for createTable",
+    "scope": "xml"
+  },
+  "foreignKeyColumn": {
+    "prefix": "fkcolumn",
+    "body": [
+      "<column name=\"$1\" type=\"${2:UUID}\">",
+      "  <constraints",
+      "    nullable=\"false\"",
+      "    referencedTableName=\"$3\"",
+      "    referencedColumnNames=\"${4:id}\"",
+      "    foreignKeyName=\"fk_$5_$1_$3_$4\" />",
+      "</column>"
+    ],
+    "description": "Liquibase column with foreign key constraint",
+    "scope": "xml"
+  }
+}

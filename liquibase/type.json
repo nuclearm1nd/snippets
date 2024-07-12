@@ -1,0 +1,22 @@
+{
+  "createType": {
+    "prefix": [
+      "createType"
+    ],
+    "body": [
+      "<ext:createType name=\"$1\">",
+      "  $2",
+      "</ext:createType>"
+    ],
+    "description": "createType Liquibase extension",
+    "scope": "xml"
+  },
+  "labelExtension": {
+    "prefix": [
+      "label"
+    ],
+    "body": "<ext:label translation=\"$2\">$1</ext:label>",
+    "description": "label Liquibase extension for createType",
+    "scope": "xml"
+  }
+}

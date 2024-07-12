@@ -1,0 +1,42 @@
+{
+  "createEnum": {
+    "prefix": "enum",
+    "body": [
+      "<ext:createType name=\"$1\">",
+			"  <ext:asEnum>",
+			"  	<ext:label translation=\"${3}\">${2}</ext:label>",
+			"  </ext:asEnum>",
+      "</ext:createType>"
+    ],
+    "description": "Liquibase create enum using createType extension",
+    "scope": "xml"
+  },
+  "fileCreateEnum": {
+    "prefix": [
+      "fileCreateEnum",
+      "fileenum",
+      "fenum"
+    ],
+    "body": [
+      "<?xml version=\"1.1\" encoding=\"UTF-8\"?>",
+      "",
+      "<databaseChangeLog",
+      "  xmlns=\"http://www.liquibase.org/xml/ns/dbchangelog\"",
+      "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"",
+      "  xmlns:ext=\"http://www.liquibase.org/xml/ns/dbchangelog-ext\"",
+      "  xsi:schemaLocation=\"http://www.liquibase.org/xml/ns/dbchangelog http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/dbchangelog/4.5/dbchangelog-4.5.xsd",
+      "                      http://www.liquibase.org/xml/ns/dbchangelog-ext http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/liquibase-ext-schema/latest/liquibase-ext-schema-latest.xsd\">",
+      "",
+      "  <changeSet author=\"${1}\" id=\"create ${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g} enum\">",
+      "    <ext:createType name=\"${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}\">",
+      "      <ext:asEnum>",
+      "      	<ext:label translation=\"${3}\">${2}</ext:label>",
+      "      </ext:asEnum>",
+      "    </ext:createType>",
+      "  </changeSet>",
+      "</databaseChangeLog>"
+    ],
+    "description": "Liquibase create enum file template",
+    "scope": "xml"
+  }
+}

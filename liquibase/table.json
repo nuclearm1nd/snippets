@@ -1,0 +1,95 @@
+{
+  "createTable": {
+    "prefix": [
+      "createtable",
+      "<createtable",
+      "<createTable",
+      "table",
+      "tbl"
+    ],
+    "body": [
+      "<createTable tableName=\"$1\" ext:historyFlag=\"true\">",
+      "  $2",
+      "</createTable>"
+    ],
+    "description": "Liquibase createTable",
+    "scope": "xml"
+  },
+  "createTableWithIdColumn": {
+    "prefix": [
+      "createtable",
+      "<createtable",
+      "<createTable",
+      "table",
+      "table",
+      "tbl"
+    ],
+    "body": [
+      "<createTable tableName=\"$1\" ext:historyFlag=\"true\">",
+      "  <column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\">",
+      "    <constraints nullable=\"false\"",
+      "                 primaryKey=\"true\"",
+      "                 primaryKeyName=\"pk_$1_id\" />",
+      "  </column>",
+      "  $2",
+      "</createTable>"
+    ],
+    "description": "Liquibase create table with default id column",
+    "scope": "xml"
+  },
+  "fileCreateTable": {
+    "prefix": [
+      "fileCreateTable",
+      "fcrtbl",
+      "fileTable",
+      "ftable",
+      "ftbl"
+    ],
+    "body": [
+      "<?xml version=\"1.1\" encoding=\"UTF-8\"?>",
+      "",
+      "<databaseChangeLog",
+      "  xmlns=\"http://www.liquibase.org/xml/ns/dbchangelog\"",
+      "  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"",
+      "  xmlns:ext=\"http://www.liquibase.org/xml/ns/dbchangelog-ext\"",
+      "  xsi:schemaLocation=\"http://www.liquibase.org/xml/ns/dbchangelog http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/dbchangelog/4.5/dbchangelog-4.5.xsd",
+      "                      http://www.liquibase.org/xml/ns/dbchangelog-ext http://artifactory.control-plane-nexus/nexus/repository/extensions/com/epam/digital/data/platform/liquibase-ext-schema/latest/liquibase-ext-schema-latest.xsd\">",
+      "",
+      "  <changeSet author=\"${1}\" id=\"create ${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g} table\">",
+      "    <createTable tableName=\"${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}\" ext:historyFlag=\"true\">",
+      "      <column name=\"id\" type=\"UUID\" defaultValueComputed=\"uuid_generate_v4()\">",
+      "        <constraints nullable=\"false\"",
+      "          primaryKey=\"true\"",
+      "          primaryKeyName=\"pk_${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}_id\" />",
+      "      </column>",
+      "        ${2}",
+      "      <column name=\"internal_status\" type=\"TEXT\">",
+      "        <constraints nullable=\"false\" />",
+      "      </column>",
+      "      <column name=\"internal_version\" type=\"INT\">",
+      "        <constraints nullable=\"false\" />",
+      "      </column>",
+      "      <column name=\"internal_created_at\" type=\"TIMESTAMP\">",
+      "        <constraints nullable=\"false\" />",
+      "      </column>",
+      "    </createTable>",
+      "  </changeSet>",
+      "</databaseChangeLog>"
+    ],
+    "description": "Liquibase create table with standard columns",
+    "scope": "xml"
+  },
+  "dropTable": {
+    "prefix": [
+      "droptable"
+    ],
+    "body": [
+      "<changeSet author=\"$1\" id=\"drop $2 table ${3:v$4}\">",
+      "  <dropTable tableName=\"$2\" cascadeConstraints=\"true\" />",
+      "  <dropTable tableName=\"$2_hst\" cascadeConstraints=\"true\" />",
+      "</changeSet>"
+    ],
+    "description": "Liquibase drop table and historic table, cascade constraints",
+    "scope": "xml"
+  }
+}

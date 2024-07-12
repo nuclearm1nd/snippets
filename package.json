@@ -11,7 +11,35 @@
       },
       {
         "language": ["xml"],
-        "path": "./xml.json"
+        "path": "./liquibase/column.json"
+      },
+      {
+        "language": ["xml"],
+        "path": "./liquibase/enum.json"
+      },
+      {
+        "language": ["xml"],
+        "path": "./liquibase/foreignKey.json"
+      },
+      {
+        "language": ["xml"],
+        "path": "./liquibase/general.json"
+      },
+      {
+        "language": ["xml"],
+        "path": "./liquibase/searchCondition.json"
+      },
+      {
+        "language": ["xml"],
+        "path": "./liquibase/table.json"
+      },
+      {
+        "language": ["xml"],
+        "path": "./liquibase/type.json"
+      },
+      {
+        "language": ["xml"],
+        "path": "./liquibase/unique.json"
       }
     ]
   }
