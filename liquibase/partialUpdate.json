@@ -19,6 +19,7 @@
       "  <changeSet author=\"${1}\" id=\"partial update ${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}\">",
       "    <ext:partialUpdate name=\"${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}\">",
       "      <ext:table name=\"${TM_FILENAME_BASE/(^[A-Z])|(?<=[a-z0-9])([A-Z])/${1:/downcase}${2:+_}${2:/downcase}/g}\">",
+      "        <ext:column name=\"version\" />",
       "        <ext:column name=\"${2}\" />",
       "      </ext:table>",
       "    </ext:partialUpdate>",
